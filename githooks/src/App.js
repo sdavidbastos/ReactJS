@@ -3,17 +3,29 @@ import React, { useState, useEffect } from "react";
 state ={
   repositories: []
 } */
+/* state = {
+  repositories: []
+}
+setRepositore é para alterar ou atualizar o valor.
+} */
 export default function App() {
-  const [repositories, setRepositories] = useState([]);
-  
-  useEffect(()=>{
+  const [location, setLocation] = useState({});
 
-  }, [repositories])
+  useEffect(() => {
+    const watchId = navigator.geolocation.watchPosition(handlePositionReceived);
+    /* Esse return é como se fose um compentWillMount */
+    return () => navigator.geolocation.clearWatch(watchId)
+  }, []);
+
+  function handlePositionReceived({coords}) {
+    const { latitude, longitude } = coords;
+    setLocation({ latitude, longitude });
+  }
+
   return (
-    <ul>
-      {repositories.map(repo => (
-        <li key={repo.id}>{repo.name}</li>
-      ))}
-    </ul>
+    <>
+      Latitude: {location.latitude} <br />
+      Longitude: {location.longitude}
+    </>
   );
 }
