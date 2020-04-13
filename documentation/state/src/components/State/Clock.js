@@ -9,21 +9,18 @@ class Clock extends Component {
     };
   }
   /* componentDidMount: é chamado sempre quando o Clock for renderizado pela primeira vez na DOM. (configurar) */
-  componentDidMount(){
-    this.timerID = setInterval(
-        () => this.tick(),
-        1000
-    )
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
   }
   /* componentWillUnmount: limpa o */
-  componentWillUnmount(){
-    clearInterval(this.timerID)
+  componentWillUnmount() {
+    clearInterval(this.timerID);
   }
 
-  tick(){
-      this.setState({
-          date: new Date()
-      })
+  tick() {
+    this.setState({
+      date: new Date()
+    });
   }
 
   render() {
